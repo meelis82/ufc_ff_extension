@@ -1,0 +1,15 @@
+{
+  "name": "ufc",
+  "title": "ufc",
+  "id": "jid1-xZB0WAdZp3DwmA",
+  "description": "UFC Notifications",
+  "author": "",
+  "license": "MPL 2.0",
+  "version": "0.1",
+  "preferences": [{
+    "name": "mailAddress",
+    "title": "E-Maili aadress",
+    "description": "Selle tunnusega registreeritakse http://ufc.fenomen.ee aadressil mänguks.",
+    "type": "string"
+  }]
+}
