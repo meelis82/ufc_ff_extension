@@ -1,8 +1,27 @@
 var L = console.log;
-var ws = new WebSocket('ws://192.168.1.2:8080', 'jetpack-protocol');
-ws.onmessage = function(ev) {
-  self.postMessage(ev.data);
+var ws;
+var timerID = 0;
+var Serverlocation = 'ws://192.168.1.2:8080';
+
+function start(Serverlocation) {
+    var ws = new WebSocket(Serverlocation, 'jetpack-protocol');
+    ws.onmessage = function(ev) {
+        self.postMessage(ev.data);
+    }
+
+    ws.onclose=function(event) {
+        self.postMessage({type: 'timerStart'});
+    }
+    ws.onopen=function(event) {
+        self.postMessage({type: 'timerStop'});
+    }
 }
+start(Serverlocation);
+
 self.port.on('message', function(m) {
   ws.send(m);
+});
+
+self.port.on("start", function() {
+ start(Serverlocation);
 });

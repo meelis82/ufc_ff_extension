@@ -4,6 +4,7 @@ $(document).ready(function()
   $('#client-form input[type="button"]').click(function (e)
   {
     e.preventDefault();
+    self.postMessage({ type: "removeButton" });
     self.postMessage({type: "send", message: $(this).data('msg')});
   });
 });
@@ -13,10 +14,14 @@ self.port.on("wsmessage", function(m) {
 });
 
 self.port.on("timerstart", function(){
+  self.postMessage({ type: "showButton" });
   $("#counter").countdown360({
     radius      : 60,
-    seconds     : 120,
-    fontColor   : '#FFFFFF'
+    seconds     : 10,
+    fontColor   : '#FFFFFF',
+    onComplete: function() {
+        self.postMessage({ type: "removeButton" });
+    }
   }).start();
 });
 
