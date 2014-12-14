@@ -10,6 +10,7 @@ $(document).ready(function()
 });
 
 self.port.on("wsmessage", function(m) {
+  $('#log').html('');
   $('#log').append(m);
 });
 
@@ -17,7 +18,7 @@ self.port.on("timerstart", function(){
   self.postMessage({ type: "showButton" });
   $("#counter").countdown360({
     radius      : 60,
-    seconds     : 10,
+    seconds     : 120,
     fontColor   : '#FFFFFF',
     onComplete: function() {
         self.postMessage({ type: "removeButton" });
